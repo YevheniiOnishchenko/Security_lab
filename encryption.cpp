@@ -9,14 +9,13 @@ bool Encryption::encrypt(std::string incomingDataFilePath,
     return false;
   }
 
-  EncryptionAlgorythm *alg =
-      EncryptionAlgorythm::constructEncryptorByAlgorythm(_algorythm);
+  std::shared_ptr<EncryptionAlgorythm> alg;
+  alg.reset(EncryptionAlgorythm::constructEncryptorByAlgorythm(_algorythm));
 
   alg->setKey(_key);
   alg->chooseAlphabet(_alphabet);
 
   return alg->encrypt(incomingDataFilePath, encryptedDataFilePath);
-  delete alg;
 }
 
 bool Encryption::decrypt(std::string encryptedDataFilePath,
@@ -26,14 +25,14 @@ bool Encryption::decrypt(std::string encryptedDataFilePath,
     return false;
   }
 
-  EncryptionAlgorythm *alg =
-      EncryptionAlgorythm::constructEncryptorByAlgorythm(_algorythm);
+  if (_encriptionAlgorithm != _algorythm) {
+    alg.reset(EncryptionAlgorythm::constructEncryptorByAlgorythm(_algorythm));
+  }
 
   alg->setKey(_key);
   alg->chooseAlphabet(_alphabet);
 
   return alg->decrypt(encryptedDataFilePath, decryptedDataFilePath);
-  delete alg;
 }
 
 void Encryption::setAlgorythm(Algorythm alg) { _algorythm = alg; }

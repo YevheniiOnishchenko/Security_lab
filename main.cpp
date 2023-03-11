@@ -11,21 +11,29 @@ int main() {
   std::string decryptedDataFilePath{
       "D:\\Studing\\Master\\2sem\\Security\\DecryptedDataFile.txt"};
 
-  std::string key{};
-  key = "Onishchenko";
+  std::string keyVizhener{"Onishchenko"};
 
-  Encryption vizhenerEncryption;
+  Encryption encryptor;
 
-  vizhenerEncryption.setAlgorythm(Algorythm::VIZHENER);
-  vizhenerEncryption.setKey(key);
-  vizhenerEncryption.chooseAlphabet(Alphabet::LATIN);
-  vizhenerEncryption.encrypt(incomingDataFilePath, encryptedDataFilePath);
-  vizhenerEncryption.decrypt(encryptedDataFilePath, decryptedDataFilePath);
+  encryptor.setAlgorythm(Algorythm::VIZHENER);
+  encryptor.setKey(keyVizhener);
 
-  bool success = vizhenerEncryption.isResultSuccessfull(incomingDataFilePath,
-                                                        decryptedDataFilePath);
+  encryptor.chooseAlphabet(Alphabet::LATIN);
+  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
+  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
 
-  std::cout << (success ? "SUCCESS" : "FAILED") << '\n';
+  bool successVIZHENER = encryptor.isResultSuccessfull(incomingDataFilePath,
+                                                       decryptedDataFilePath);
+  std::cout << (successVIZHENER ? "SUCCESS" : "FAILED") << '\n';
+
+  encryptor.setAlgorythm(Algorythm::ONE_TIME_PAD);
+  // key is generated automaticaly
+  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
+  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
+
+  bool successONE_TIME_PAD = encryptor.isResultSuccessfull(
+      incomingDataFilePath, decryptedDataFilePath);
+  std::cout << (successONE_TIME_PAD ? "SUCCESS" : "FAILED") << '\n';
 
   return 0;
 }
