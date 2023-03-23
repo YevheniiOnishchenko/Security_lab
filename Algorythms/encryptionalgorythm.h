@@ -6,7 +6,7 @@
 #include <numeric>
 #include <vector>
 
-enum class Algorythm { UNDEFINED = 0, VIZHENER, ONE_TIME_PAD };
+enum class Algorythm { UNDEFINED = 0, VIZHENER, ONE_TIME_PAD, DES };
 enum class Alphabet { UNDEFINED = 0, LATIN, CYRILLIC };
 
 class EncryptionAlgorythm {
@@ -22,7 +22,7 @@ public:
 protected:
   std::vector<char> _alphabet;
   Alphabet _alphabetType = Alphabet::UNDEFINED;
-  std::vector<char> _key;
+  std::string _key;
 
   int getAlphabetSize();
   int getKeySize();

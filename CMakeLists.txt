@@ -11,6 +11,7 @@ FILE(GLOB SRC ${CMAKE_SOURCE_DIR}/*.cpp
 )
 FILE(GLOB HDR ${CMAKE_SOURCE_DIR}/*.h
     ${CMAKE_SOURCE_DIR}/Algorythms/*.h
+    ${CMAKE_SOURCE_DIR}/Utils/*.h
 )
 
 add_executable(Lab1 ${SRC} ${HDR} main.cpp)

@@ -15,25 +15,35 @@ int main() {
 
   Encryption encryptor;
 
-  encryptor.setAlgorythm(Algorythm::VIZHENER);
-  encryptor.setKey(keyVizhener);
+  //  encryptor.setAlgorythm(Algorythm::VIZHENER);
+  //  encryptor.setKey(keyVizhener);
 
+  //  encryptor.chooseAlphabet(Alphabet::LATIN);
+  //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
+  //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
+
+  //  bool successVIZHENER = encryptor.isResultSuccessfull(incomingDataFilePath,
+  //                                                       decryptedDataFilePath);
+  //  std::cout << (successVIZHENER ? "SUCCESS" : "FAILED") << '\n';
+
+  //  encryptor.setAlgorythm(Algorythm::ONE_TIME_PAD);
+  //  // key is generated automaticaly
+  //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
+  //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
+
+  //  bool successONE_TIME_PAD = encryptor.isResultSuccessfull(
+  //      incomingDataFilePath, decryptedDataFilePath);
+  //  std::cout << (successONE_TIME_PAD ? "SUCCESS" : "FAILED") << '\n';
+
+  encryptor.setAlgorythm(Algorythm::DES);
+  encryptor.setKey("Onishe");
   encryptor.chooseAlphabet(Alphabet::LATIN);
   encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
   encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
 
-  bool successVIZHENER = encryptor.isResultSuccessfull(incomingDataFilePath,
-                                                       decryptedDataFilePath);
-  std::cout << (successVIZHENER ? "SUCCESS" : "FAILED") << '\n';
-
-  encryptor.setAlgorythm(Algorythm::ONE_TIME_PAD);
-  // key is generated automaticaly
-  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
-  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
-
-  bool successONE_TIME_PAD = encryptor.isResultSuccessfull(
-      incomingDataFilePath, decryptedDataFilePath);
-  std::cout << (successONE_TIME_PAD ? "SUCCESS" : "FAILED") << '\n';
+  bool successDES = encryptor.isResultSuccessfull(incomingDataFilePath,
+                                                  decryptedDataFilePath);
+  std::cout << (successDES ? "SUCCESS" : "FAILED") << '\n';
 
   return 0;
 }

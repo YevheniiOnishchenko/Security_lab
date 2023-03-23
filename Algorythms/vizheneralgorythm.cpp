@@ -26,7 +26,7 @@ bool VizhenerAlgorythm::encrypt(std::string incomingDataFilePath,
       return true;
     }
 
-    if (keyUseTracker == _key.size()) {
+    if (keyUseTracker == _key.length()) {
       keyUseTracker = 0;
     }
 
@@ -70,7 +70,7 @@ bool VizhenerAlgorythm::decrypt(std::string encryptedDataFilePath,
       return true;
     }
 
-    if (keyUseTracker == _key.size()) {
+    if (keyUseTracker == _key.length()) {
       keyUseTracker = 0;
     }
 

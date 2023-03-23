@@ -1,4 +1,5 @@
 #include "encryptionalgorythm.h"
+#include "desalgorythm.h"
 #include "onetimepadalgorythm.h"
 #include "vizheneralgorythm.h"
 
@@ -15,17 +16,16 @@ EncryptionAlgorythm::constructEncryptorByAlgorythm(Algorythm alg) {
   case Algorythm::ONE_TIME_PAD:
     return new OneTimePadAlgorythm();
     break;
+  case Algorythm::DES:
+    return new DesAlgorythm();
+    break;
   default:
     return new VizhenerAlgorythm(); // to be changed
     break;
   }
 }
 
-void EncryptionAlgorythm::setKey(std::string &key) {
-  for (const auto c : key) {
-    _key.push_back(c);
-  }
-}
+void EncryptionAlgorythm::setKey(std::string &key) { _key = key; }
 
 void EncryptionAlgorythm::chooseAlphabet(Alphabet type) {
   _alphabetType = type;
@@ -33,7 +33,7 @@ void EncryptionAlgorythm::chooseAlphabet(Alphabet type) {
 
 int EncryptionAlgorythm::getAlphabetSize() { return _alphabet.size(); }
 
-int EncryptionAlgorythm::getKeySize() { return _key.size(); }
+int EncryptionAlgorythm::getKeySize() { return _key.length(); }
 
 void EncryptionAlgorythm::fillInAlphabet() {
   switch (_alphabetType) {
