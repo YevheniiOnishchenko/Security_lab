@@ -18,7 +18,7 @@ int main() {
   //  encryptor.setAlgorythm(Algorythm::VIZHENER);
   //  encryptor.setKey(keyVizhener);
 
-  //  encryptor.chooseAlphabet(Alphabet::LATIN);
+  //  encryptor.chooseAlphabet(Alphabet::LATIN_FULL);
   //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
   //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
 
@@ -35,15 +35,20 @@ int main() {
   //      incomingDataFilePath, decryptedDataFilePath);
   //  std::cout << (successONE_TIME_PAD ? "SUCCESS" : "FAILED") << '\n';
 
-  encryptor.setAlgorythm(Algorythm::DES);
-  encryptor.setKey("Onishe");
+  //  encryptor.setAlgorythm(Algorythm::DES);
+  //  encryptor.setKey("Onishe");
+  //  encryptor.chooseAlphabet(Alphabet::LATIN_FULL);
+  //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
+  //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
+
+  encryptor.setAlgorythm(Algorythm::AFFINE);
+  encryptor.setKey("3, 5");
   encryptor.chooseAlphabet(Alphabet::LATIN);
   encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
   encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
-
-  bool successDES = encryptor.isResultSuccessfull(incomingDataFilePath,
-                                                  decryptedDataFilePath);
-  std::cout << (successDES ? "SUCCESS" : "FAILED") << '\n';
+  bool successAffine = encryptor.isResultSuccessfull(incomingDataFilePath,
+                                                     decryptedDataFilePath);
+  std::cout << (successAffine ? "SUCCESS" : "FAILED") << '\n';
 
   return 0;
 }

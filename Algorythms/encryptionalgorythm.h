@@ -6,8 +6,8 @@
 #include <numeric>
 #include <vector>
 
-enum class Algorythm { UNDEFINED = 0, VIZHENER, ONE_TIME_PAD, DES };
-enum class Alphabet { UNDEFINED = 0, LATIN, CYRILLIC };
+enum class Algorythm { UNDEFINED = 0, VIZHENER, ONE_TIME_PAD, DES, AFFINE };
+enum class Alphabet { UNDEFINED = 0, LATIN_FULL, LATIN, CYRILLIC };
 
 class EncryptionAlgorythm {
 public:

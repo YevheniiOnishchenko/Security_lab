@@ -1,4 +1,5 @@
 #include "encryptionalgorythm.h"
+#include "affinealgorythm.h"
 #include "desalgorythm.h"
 #include "onetimepadalgorythm.h"
 #include "vizheneralgorythm.h"
@@ -19,6 +20,9 @@ EncryptionAlgorythm::constructEncryptorByAlgorythm(Algorythm alg) {
   case Algorythm::DES:
     return new DesAlgorythm();
     break;
+  case Algorythm::AFFINE:
+    return new AffineAlgorythm();
+    break;
   default:
     return new VizhenerAlgorythm(); // to be changed
     break;
@@ -37,9 +41,13 @@ int EncryptionAlgorythm::getKeySize() { return _key.length(); }
 
 void EncryptionAlgorythm::fillInAlphabet() {
   switch (_alphabetType) {
-  case Alphabet::LATIN:
+  case Alphabet::LATIN_FULL:
     _alphabet.resize(128);
     std::iota(_alphabet.begin(), _alphabet.end(), static_cast<char>(0));
+    break;
+  case Alphabet::LATIN:
+    _alphabet.resize(26);
+    std::iota(_alphabet.begin(), _alphabet.end(), static_cast<char>(65));
     break;
   case Alphabet::CYRILLIC:
 
