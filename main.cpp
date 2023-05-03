@@ -18,7 +18,7 @@ int main() {
   //  encryptor.setAlgorythm(Algorythm::VIZHENER);
   //  encryptor.setKey(keyVizhener);
 
-  //  encryptor.chooseAlphabet(Alphabet::LATIN_FULL);
+  //  encryptor.chooseAlphabet(Alphabet::ALL_SYMBOLS);
   //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
   //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
 
@@ -37,12 +37,21 @@ int main() {
 
   //  encryptor.setAlgorythm(Algorythm::DES);
   //  encryptor.setKey("Onishe");
-  //  encryptor.chooseAlphabet(Alphabet::LATIN_FULL);
+  //  encryptor.chooseAlphabet(Alphabet::ALL_SYMBOLS);
   //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
   //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
 
-  encryptor.setAlgorythm(Algorythm::AFFINE);
-  encryptor.setKey("3, 5");
+  //  encryptor.setAlgorythm(Algorythm::AFFINE);
+  //  encryptor.setKey("3, 5");
+  //  encryptor.chooseAlphabet(Alphabet::LATIN);
+  //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
+  //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
+  //  bool successAffine = encryptor.isResultSuccessfull(incomingDataFilePath,
+  //                                                     decryptedDataFilePath);
+  //  std::cout << (successAffine ? "SUCCESS" : "FAILED") << '\n';
+
+  encryptor.setAlgorythm(Algorythm::RSA);
+  encryptor.setKey("827, 829"); // prime numbers
   encryptor.chooseAlphabet(Alphabet::LATIN);
   encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
   encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);

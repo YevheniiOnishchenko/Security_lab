@@ -11,7 +11,7 @@ bool DesAlgorythm::encrypt(std::string incomingDataFilePath,
   bool success = false;
 
   // working with key
-  memcpy(_keyData, &_key[0], 8);
+  memcpy(_keyData, &_keyString[0], 8);
   success = keyCompressionPermutation();
   success = subKeysGeneration() && success;
 
@@ -48,7 +48,7 @@ bool DesAlgorythm::decrypt(std::string encryptedDataFilePath,
   bool success = false;
 
   // working with key
-  memcpy(_keyData, &_key[0], 8);
+  memcpy(_keyData, &_keyString[0], 8);
 
   success = keyCompressionPermutation();
   success = subKeysGeneration() && success;

@@ -5,10 +5,10 @@ AffineAlgorythm::AffineAlgorythm() {}
 bool AffineAlgorythm::encrypt(std::string incomingDataFilePath,
                               std::string encryptedDataFilePath) {
   if (_alphabetType == Alphabet::UNDEFINED || incomingDataFilePath.empty() ||
-      EncryptionAlgorythm::_key.empty()) {
+      EncryptionAlgorythm::_keyString.empty()) {
     return false;
   }
-  if (!parseKeyFromString(EncryptionAlgorythm::_key)) {
+  if (!parseKeyFromString(EncryptionAlgorythm::_keyString)) {
     return false;
   }
   fillInAlphabet();
@@ -20,7 +20,7 @@ bool AffineAlgorythm::encrypt(std::string incomingDataFilePath,
   out.open(encryptedDataFilePath.c_str(), std::ios_base::out);
 
   int x, y;
-  int gcd = extendedGcd(_key.first, _alphabet.size(), x, y);
+  int gcd = extendedGcd(_keyPair.first, _alphabet.size(), x, y);
   if (gcd != 1) {
     return false;
   }
@@ -45,7 +45,8 @@ bool AffineAlgorythm::encrypt(std::string incomingDataFilePath,
 
     incomingLetterPosition = _alphabetIndices.at(buffer);
     int encryptedLetterPosition =
-        (incomingLetterPosition * _key.first + _key.second) % getAlphabetSize();
+        (incomingLetterPosition * _keyPair.first + _keyPair.second) %
+        getAlphabetSize();
     char encryptedLetter =
         static_cast<char>(_alphabetIndicesReverse.at(encryptedLetterPosition));
 
@@ -64,11 +65,11 @@ bool AffineAlgorythm::encrypt(std::string incomingDataFilePath,
 bool AffineAlgorythm::decrypt(std::string encryptedDataFilePath,
                               std::string decryptedDataFilePath) {
   if (_alphabetType == Alphabet::UNDEFINED || encryptedDataFilePath.empty() ||
-      EncryptionAlgorythm::_key.empty()) {
+      EncryptionAlgorythm::_keyString.empty()) {
     return false;
   }
-  _key = {0, 0};
-  if (!parseKeyFromString(EncryptionAlgorythm::_key)) {
+  _keyString = {0, 0};
+  if (!parseKeyFromString(EncryptionAlgorythm::_keyString)) {
     return false;
   }
   fillInAlphabet();
@@ -80,7 +81,7 @@ bool AffineAlgorythm::decrypt(std::string encryptedDataFilePath,
   out.open(decryptedDataFilePath.c_str(), std::ios_base::out);
 
   int x, y; // x is converse a value
-  int gcd = extendedGcd(_key.first, _alphabet.size(), x, y);
+  int gcd = extendedGcd(_keyPair.first, _alphabet.size(), x, y);
   if (gcd != 1) {
     return false;
   }
@@ -105,7 +106,7 @@ bool AffineAlgorythm::decrypt(std::string encryptedDataFilePath,
 
     encryptedLetterPosition = _alphabetIndices.at(buffer);
     int decryptedLetterPosition =
-        ((encryptedLetterPosition - _key.second) * x) % getAlphabetSize();
+        ((encryptedLetterPosition - _keyPair.second) * x) % getAlphabetSize();
 
     if (decryptedLetterPosition > getAlphabetSize()) {
       decryptedLetterPosition = decryptedLetterPosition % getAlphabetSize();
@@ -126,43 +127,4 @@ bool AffineAlgorythm::decrypt(std::string encryptedDataFilePath,
   out.close();
 
   return true;
-}
-
-void AffineAlgorythm::determineIndicesForAlphabet() {
-  if (!_alphabetIndices.empty()) {
-    _alphabetIndices.clear();
-  }
-  for (int i = 0; i < getAlphabetSize(); i++) {
-    _alphabetIndices.insert(std::pair<char, int>(_alphabet.at(i), i));
-    _alphabetIndicesReverse.insert(std::pair<int, char>(i, _alphabet.at(i)));
-  }
-}
-
-bool AffineAlgorythm::parseKeyFromString(std::string s) {
-  int comaPosition = s.find(',');
-  if (comaPosition == -1) {
-    return false;
-  }
-  std::string s1 = s.substr(0, comaPosition);
-  std::string s2 = s.substr(comaPosition + 1, s.length() - s1.length() - 1);
-
-  _key.first = std::stoi(s1);
-  _key.second = std::stoi(s2);
-  return true;
-}
-
-int AffineAlgorythm::extendedGcd(const int &a, const int &b, int &x, int &y) {
-  if (a == 0) {
-    x = 0;
-    y = 1;
-    return b;
-  }
-
-  int x1, y1;
-  int gcd = extendedGcd(b % a, a, x1, y1);
-
-  x = y1 - (b / a) * x1;
-  y = x1;
-
-  return gcd;
 }

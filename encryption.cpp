@@ -5,14 +5,14 @@ Encryption::Encryption() {}
 bool Encryption::encrypt(std::string incomingDataFilePath,
                          std::string encryptedDataFilePath) {
   if (incomingDataFilePath.empty() || _algorythm == Algorythm::UNDEFINED ||
-      _key.empty()) {
+      _keyString.empty()) {
     return false;
   }
 
   std::shared_ptr<EncryptionAlgorythm> alg;
   alg.reset(EncryptionAlgorythm::constructEncryptorByAlgorythm(_algorythm));
 
-  alg->setKey(_key);
+  alg->setKey(_keyString);
   alg->chooseAlphabet(_alphabet);
 
   return alg->encrypt(incomingDataFilePath, encryptedDataFilePath);
@@ -21,7 +21,7 @@ bool Encryption::encrypt(std::string incomingDataFilePath,
 bool Encryption::decrypt(std::string encryptedDataFilePath,
                          std::string decryptedDataFilePath) {
   if (encryptedDataFilePath.empty() || _algorythm == Algorythm::UNDEFINED ||
-      _key.empty()) {
+      _keyString.empty()) {
     return false;
   }
 
@@ -29,7 +29,7 @@ bool Encryption::decrypt(std::string encryptedDataFilePath,
     alg.reset(EncryptionAlgorythm::constructEncryptorByAlgorythm(_algorythm));
   }
 
-  alg->setKey(_key);
+  alg->setKey(_keyString);
   alg->chooseAlphabet(_alphabet);
 
   return alg->decrypt(encryptedDataFilePath, decryptedDataFilePath);
@@ -37,7 +37,7 @@ bool Encryption::decrypt(std::string encryptedDataFilePath,
 
 void Encryption::setAlgorythm(Algorythm alg) { _algorythm = alg; }
 
-void Encryption::setKey(std::string key) { _key = key; }
+void Encryption::setKey(std::string key) { _keyString = key; }
 
 void Encryption::chooseAlphabet(Alphabet alph) { _alphabet = alph; }
 

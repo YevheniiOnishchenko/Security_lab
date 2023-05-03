@@ -19,7 +19,7 @@ private:
   Algorythm _encriptionAlgorithm =
       Algorythm::UNDEFINED; // for internal algorithm tracking
   Alphabet _alphabet = Alphabet::UNDEFINED;
-  std::string _key{};
+  std::string _keyString{};
   std::shared_ptr<EncryptionAlgorythm> alg;
 };
 
