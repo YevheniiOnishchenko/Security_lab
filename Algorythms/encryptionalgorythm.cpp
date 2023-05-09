@@ -2,6 +2,7 @@
 #include "affinealgorythm.h"
 #include "desalgorythm.h"
 #include "onetimepadalgorythm.h"
+#include "rabinalgorythm.h"
 #include "rsaalgorythm.h"
 #include "vizheneralgorythm.h"
 
@@ -26,6 +27,8 @@ EncryptionAlgorythm::constructEncryptorByAlgorythm(Algorythm alg) {
     break;
   case Algorythm::RSA:
     return new RsaAlgorythm();
+  case Algorythm::RABIN:
+    return new RabinAlgorythm();
   default:
     return new VizhenerAlgorythm(); // to be changed
     break;

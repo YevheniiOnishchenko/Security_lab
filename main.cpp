@@ -50,14 +50,22 @@ int main() {
   //                                                     decryptedDataFilePath);
   //  std::cout << (successAffine ? "SUCCESS" : "FAILED") << '\n';
 
-  encryptor.setAlgorythm(Algorythm::RSA);
-  encryptor.setKey("827, 829"); // prime numbers
+  //  encryptor.setAlgorythm(Algorythm::RSA);
+  //  encryptor.setKey("827, 829"); // prime numbers
+  //  encryptor.chooseAlphabet(Alphabet::LATIN);
+  //  encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
+  //  encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
+  //  bool successRsa = encryptor.isResultSuccessfull(incomingDataFilePath,
+  //                                                     decryptedDataFilePath);
+  //  std::cout << (successRsa ? "SUCCESS" : "FAILED") << '\n';
+
+  encryptor.setAlgorythm(Algorythm::RABIN);
+  encryptor.setKey("167, 719"); // prime numbers
   encryptor.chooseAlphabet(Alphabet::LATIN);
   encryptor.encrypt(incomingDataFilePath, encryptedDataFilePath);
   encryptor.decrypt(encryptedDataFilePath, decryptedDataFilePath);
-  bool successAffine = encryptor.isResultSuccessfull(incomingDataFilePath,
-                                                     decryptedDataFilePath);
-  std::cout << (successAffine ? "SUCCESS" : "FAILED") << '\n';
-
+  bool successRabin = encryptor.isResultSuccessfull(incomingDataFilePath,
+                                                    decryptedDataFilePath);
+  std::cout << (successRabin ? "SUCCESS" : "FAILED") << '\n';
   return 0;
 }

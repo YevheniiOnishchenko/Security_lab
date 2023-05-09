@@ -12,7 +12,8 @@ enum class Algorythm {
   ONE_TIME_PAD,
   DES,
   AFFINE,
-  RSA
+  RSA,
+  RABIN
 };
 enum class Alphabet { UNDEFINED = 0, ALL_SYMBOLS, LATIN, CYRILLIC };
 
